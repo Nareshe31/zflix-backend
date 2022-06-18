@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Results for <%=query%></title>
+    <link rel="icon" type="image/png" href="https://cdn.glitch.me/7fece456-8b5b-40e8-936b-48ec60638ef6%2FDaco_4082111.png?v=1634983256354"/>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+  </head>
+  <body>
+        <header>
+        <a href="/api/v2/torrent-search" class="nav-title">
+            <p>Torrent Search Engine</p>
+        </a>
+        <form action="/api/v2/torrent-search" method="get">
+            <div class="search-box">
+                <input type="text" required value="<%=query%>" name="query" id="query" placeholder="Search by title...">
+            
+              <input type="hidden" name="page" value="1" id="page">
+              <button type="submit">Search</button>
+            </div>
+        </form>
+        
+    </header>
+    <main class="main-content">
+      <% for(var i=0; i<result.length; i++) {%>
+        <div class="result-container">
+            <div class="left-box">
+                <div class="left-top-box">
+                    <p class="title"><%=result[i].title%></p>
+
+                </div>
+                <div class="left-bottom-box">
+                    <div class="downloads"><i class="fas fa-download"></i><%=result[i].downloads%></div>
+                    <div class="size"><i class="fas fa-database"></i><%=result[i].size%></div>
+                    <div class="seeders"><i class="fas fa-arrow-up"></i><%=result[i].seeds%></div>
+                    <div class="peers"><i class="fas fa-arrow-down"></i><%=result[i].peers%></div>
+                    <div class="created-at"><i class="fas fa-calendar-alt"></i><%=result[i].date%></div>
+                </div>
+            </div>
+            <div class="right-box">
+                <a href="<%=result[i].torrent.replace(/(\[Bitsearch\.to\])/g, "")%>" target="_blank">
+                <div class="download-icon">
+                    <i class="fas fa-download"></i>
+                </div>
+            </a>
+              <a href="<%=result[i].magnet%>" target="_blank">
+                <div class="magnet-icon">
+                    <i class="fas fa-magnet"></i>
+                </div>
+                </a>
+            </div>
+        </div>
+      <% } %>
+    </main>
+    <% if(page<4 || page>total_pages-2 ){ %>
+      <div class="page-container"> 
+        <a class="" href="<%="/api/v2/torrent-search?query="+query+"&page="+(page-1)%>"> 
+              <div class="arrow-icon previous-page">
+                  <i class="fas fa-chevron-left"></i>
+              </div>
+          </a>
+         <% for(var i=1; i<=5; i++) {%>
+        <a class="page <%= i==page ? 'current-page' : 'other-page' %>" href="<%="/api/v2/torrent-search?query="+query+"&page="+i%>"><%=i%></a>
+        <% } %>  
+        <a href="<%="/api/v2/torrent-search?query="+query+"&page="+(Number(page)+1)%>">
+              <div class="arrow-icon previous-page">
+                  <i class="fas fa-chevron-right"></i>
+              </div>     
+          </a>
+      </div>
+    <% } else{ %>
+      <div class="page-container"> 
+          <a href="<%="/api/v2/torrent-search?query="+query+"&page="+(page-1)%>" href=""> 
+                <div class="arrow-icon previous-page">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+            </a>
+           <% for(var i=page-2; i<=(Number(page)+2); i++) {%>
+          <a class="page <%= i==page ? 'current-page' : 'other-page' %>" href="<%="/api/v2/torrent-search?query="+query+"&page="+i%>"><%=i%></a>
+          <% } %>  
+          <a href="<%="/api/v2/torrent-search?query="+query+"&page="+(page+1)%>">
+                <div class="arrow-icon previous-page">
+                    <i class="fas fa-chevron-right"></i>
+                </div>     
+            </a>
+        </div>
+    <% } %>
+
+  </body>
+  
+</html>
