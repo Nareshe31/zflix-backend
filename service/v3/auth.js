@@ -227,7 +227,7 @@ service.signupUser = async userObj => {
                                     <td bgcolor="#ffffff" align="center" style="padding: 20px 30px 60px 30px;">
                                         <table border="0" cellspacing="0" cellpadding="0">
                                             <tr>
-                                                <td align="center" style="border-radius: 3px;" bgcolor="#c60510"><a href="https://important-bow-prawn.glitch.me/verify-email?token=${token}" target="_blank" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #c60510; display: inline-block;">Confirm Account</a></td>
+                                                <td align="center" style="border-radius: 3px;" bgcolor="#c60510"><a href="https://zflix-app.netlify.app/en/u/verify?token=${token}" target="_blank" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #c60510; display: inline-block;">Confirm Account</a></td>
                                             </tr>
                                         </table>
                                     </td>
@@ -242,7 +242,7 @@ service.signupUser = async userObj => {
                     </tr> <!-- COPY -->
                     <tr>
                         <td bgcolor="#ffffff" align="left" style="padding: 20px 30px 20px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-                            <p style="margin: 0;"><a href="#" target="_blank" style="color: #c60510;">https://important-bow-prawn.glitch.me/verify-email?token=${token}</a></p>
+                            <p style="margin: 0;"><a href="#" target="_blank" style="color: #c60510;">https://zflix-app.netlify.app/en/u/verify?token=${token}</a></p>
                         </td>
                     </tr>
                     <tr>
@@ -527,7 +527,9 @@ service.verifyEmail = async token => {
       } else {
         let isVerified = await model.verifyUser(user._id);
         if (isVerified) {
-          return { user: isVerified,response:true };
+          const userNew=isVerified.toObject()
+          delete userNew["password"]
+          return { user: userNew,response:true };
         } else {
           let err = new Error(
             "Could not verify your account. Please try again later"
@@ -546,7 +548,19 @@ service.verifyEmail = async token => {
   } catch (error) {
     let errorMessage =
       error.message == "You have already verified your account"
-        ? error.message
+        ? `<p><style>.login-button {
+          border: none;
+          outline: none;
+          padding: 6px 14px;
+          border-radius: 2px;
+          font-weight: 600;
+          font-size: 0.95rem;
+          margin-top: 6px;
+          width: max-content;
+          background: #bbb3;
+          cursor: pointer;
+          color: white;
+        }</style>You have already verified your account. Please sign in to continue</p><a href='/en/login'><button class='login-button'>Sign In</button></a>`
         : "This link is not valid. Please use the link sent to your registered email address to verify your account";
     let err = new Error(errorMessage);
     err.status = error.status || 400;
