@@ -144,7 +144,7 @@ const appInfoSchema = new Schema({
   version: { type: String },
   url: { type: String },
   new: [{ type: String }],
-},{ collection: "AppInfo" });
+},{ collection: "appinfos" });
 
 const listSchema = new Schema({
   title:{type:String},
@@ -220,7 +220,7 @@ collection.getAppInfoCollection = async () => {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       })
-    ).model("AppInfo", appInfoSchema);
+    ).model("appinfos", appInfoSchema);
   } catch (error) {
     let err = new Error("Cannot connect to mongodb");
     err.status = 400;
