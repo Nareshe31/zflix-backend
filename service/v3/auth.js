@@ -516,12 +516,24 @@ service.forgotPassword = async email => {
 };
 
 service.verifyEmail = async token => {
-  try {
+  // try {
     const payload = await jwt.verify(token, JWT_SECRET);
     let user = await model.getUser(payload.email);
     if (user) {
       if (user.verified) {
-        let err = new Error("You have already verified your account");
+        let err = new Error(`<p><style>.login-button {
+          border: none;
+          outline: none;
+          padding: 6px 14px;
+          border-radius: 2px;
+          font-weight: 600;
+          font-size: 0.95rem;
+          margin-top: 6px;
+          width: max-content;
+          background: #bbb3;
+          cursor: pointer;
+          color: white;
+        }</style>Hi ${user.name}. You have already verified your account. Please sign in to enjoy all features of ZFlix</p><a href='/en/login'><button class='login-button'>Sign In</button></a>`);
         err.status = 404;
         throw err;
       } else {
@@ -540,32 +552,32 @@ service.verifyEmail = async token => {
       }
     } else {
       let err = new Error(
-        "This link is not valid. Please use the link sent to your registered mail id"
+        "This link is not valid. Please use the link sent to your registered email address"
       );
       err.status = 403;
       throw err;
     }
-  } catch (error) {
-    let errorMessage =
-      error.message == "You have already verified your account"
-        ? `<p><style>.login-button {
-          border: none;
-          outline: none;
-          padding: 6px 14px;
-          border-radius: 2px;
-          font-weight: 600;
-          font-size: 0.95rem;
-          margin-top: 6px;
-          width: max-content;
-          background: #bbb3;
-          cursor: pointer;
-          color: white;
-        }</style>You have already verified your account. Please sign in to continue</p><a href='/en/login'><button class='login-button'>Sign In</button></a>`
-        : "This link is not valid. Please use the link sent to your registered email address to verify your account";
-    let err = new Error(errorMessage);
-    err.status = error.status || 400;
-    throw err;
-  }
+  // } catch (error) {
+  //   let errorMessage =
+  //     error.message == "You have already verified your account"
+  //       ? `<p><style>.login-button {
+  //         border: none;
+  //         outline: none;
+  //         padding: 6px 14px;
+  //         border-radius: 2px;
+  //         font-weight: 600;
+  //         font-size: 0.95rem;
+  //         margin-top: 6px;
+  //         width: max-content;
+  //         background: #bbb3;
+  //         cursor: pointer;
+  //         color: white;
+  //       }</style>Hi {} You have already verified your account. Please sign in to continue</p><a href='/en/login'><button class='login-button'>Sign In</button></a>`
+  //       : "This link is not valid. Please use the link sent to your registered email address to verify your account";
+  //   let err = new Error(errorMessage);
+  //   err.status = error.status || 400;
+  //   throw err;
+  // }
 };
 
 service.searchUser = async name => {
