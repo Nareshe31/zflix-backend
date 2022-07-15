@@ -206,7 +206,7 @@ service.signupUser = async userObj => {
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                     <tr>
                         <td bgcolor="#ffffff" align="center" valign="top" style="padding: 20px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
-                            <h1 style="font-size: 30px; font-weight: 400; margin:0px;letter-spacing: normal;">Thanks for signing up, Naresh!</h1> 
+                            <h1 style="font-size: 30px; font-weight: 400; margin:0px;letter-spacing: normal;">Thanks for signing up, ${userObj.name}</h1> 
                         </td>
                     </tr>
                 </table>
@@ -447,7 +447,7 @@ service.forgotPassword = async email => {
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                     <tr>
                         <td bgcolor="#ffffff" align="center" valign="top" style="padding: 20px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
-                            <h1 style="font-size: 30px; font-weight: 400; margin:0px;letter-spacing: normal;">Thanks for signing up, Naresh!</h1> 
+                            <h1 style="font-size: 30px; font-weight: 400; margin:0px;letter-spacing: normal;">Thanks for signing up, ${userObj.name}!</h1> 
                         </td>
                     </tr>
                 </table>
