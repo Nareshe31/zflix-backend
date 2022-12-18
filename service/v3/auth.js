@@ -31,7 +31,7 @@ service.loginUser = async (email, password) => {
       throw err;
     }
   } else {
-    let err = new Error("User does not exist");
+    let err = new Error("User does not exist. Please register");
     err.status = 403;
     throw err;
   }
@@ -275,7 +275,7 @@ service.signupUser = async userObj => {
       let err = new Error("Something went wrong while creating a new user");
       err.status = 400;
       throw err;
-    }
+    }g
   }
 };
 
