@@ -53,7 +53,7 @@ app.get('/watch/tv/:tvId/:season/:episode',(req,res)=>{
   <body style="margin:0;height: 100vh;
     width: 100vw;
     position: relative;">
-      <iframe id="watch" scrolling="no" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" src="https://embed.smashystream.com/playere.php?tmdb=${req.params.tvId}&season=${req.params.season}&episode=${req.params.episode}" style="border: 0px; width: 100%; height: 100%; display: block; margin: 0px; padding: 0px;"></iframe>
+      <iframe id="watch" scrolling="no" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" src="https://vidsrc.to/embed/tv/${req.params.tvId}/${req.params.season}/${req.params.episode}" style="border: 0px; width: 100%; height: 100%; display: block; margin: 0px; padding: 0px;"></iframe>
   </body>
   </html>`)
 })
@@ -71,7 +71,7 @@ app.get('/watch/movie/:movieId',(req,res)=>{
   <body style="margin:0;height: 100vh;
     width: 100vw;
     position: relative;">
-        <iframe id="watch" scrolling="no" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" src="https://embed.smashystream.com/playere.php?tmdb=${req.params.movieId}" style="border: 0px; width: 100%; height: 100%; display: block; margin: 0px; padding: 0px;"></iframe></div></div>
+        <iframe id="watch" scrolling="no" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" src="https://vidsrc.to/embed/movie/${req.params.movieId}" style="border: 0px; width: 100%; height: 100%; display: block; margin: 0px; padding: 0px;"></iframe></div></div>
   </body>
   </html>`)
 })
